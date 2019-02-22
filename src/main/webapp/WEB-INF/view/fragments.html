@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="header">
+    <h1>Games Collection Site</h1>
+    <div sec:authorize="isAuthenticated()">
+        <span th:text="|Hello, ${session.user.username}! |"></span>
+        <a href="user.html" th:href="@{user}">Your account</a>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <p>
+             You are not logged in! <a href="login.html" th:href="@{login}">Log in!</a>
+        </p>
+    </div>
+</div>
+<div th:fragment="search-bar">
+    <form action="search.html" th:action="@{search}" method="get">
+        <label for="search">Search games:</label>
+        <input type="text" id="search" name="pattern"/>
+        <input type="submit" value="Search"/>
+    </form>
+</div>
+
+</html>

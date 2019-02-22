@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title >Search Result</title>
+</head>
+<body>
+    <header th:insert="~{fragments :: header}"></header>
+    <div th:insert="~{fragments :: search-bar}"></div>
+    <div>
+        <p>Search result:</p>
+        <p th:if="${games.isEmpty()}">There are no games matching such pattern.</p>
+        <table th:unless="${games.isEmpty()}">
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Year of publication</th>
+                <th>Publisher</th>
+                <th>Add Game</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="game : ${games}">
+                <td th:text="${game.title}">Assassin's Creed</td>
+                <td th:text="${{game.dateOfPublication}}">2008</td>
+                <td th:text="${{game.publisher}}">Ubisoft</td>
+                <td>
+                    <a href="search.html" th:href="@{'user/add/' + ${game.id}}">Add</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a href="add_game">Haven't found your game? Add one!</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new game</title>
+</head>
+<body>
+<header th:insert="~{fragments :: header}"></header>
+<div th:if="${addPublisherResult} != null">
+    <p th:text="${addPublisherResult}"></p>
+</div>
+<div>
+    <form action="search.html" th:action="@{add_game}" th:object="${newGame}" method="post">
+        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+        <label for="title">Game title:</label><br>
+        <input type="text" id="title" th:field="*{title}"><br>
+        <p th:if="${#fields.hasErrors('dateOfPublication')}" th:errors="*{dateOfPublication}"></p>
+        <label for="dateOfPublication">Date of publication:</label><br>
+        <input type="date" id="dateOfPublication" th:field="*{dateOfPublication}"><br>
+        <p th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}"></p>
+        <label for="publisher">Publisher:</label><br>
+        <select id="publisher" th:field="*{publisher}">
+            <option th:each="publisher : ${publishers}"
+                    th:value="${publisher.id}"
+                    th:text="${publisher.name}">CDPR</option>
+        </select><br>
+        <a href="add_publisher_get.html" th:href="add_publisher">Isn't any publisher correct? Add one!</a><br>
+        <input type="submit" value="Add game">
+    </form>
+</div>
+</body>
+</html>

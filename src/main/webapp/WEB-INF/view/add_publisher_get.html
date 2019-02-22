@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add new publisher</title>
+</head>
+<body>
+<header th:insert="~{fragments :: header}"></header>
+<div>
+    <form action="add_game_get.html" th:action="@{add_publisher}" th:object="${newPublisher}" method="post">
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+        <label for="name">Publisher name:</label><br>
+        <input type="text" id="name" th:field="*{name}"><br>
+        <input type="submit" value="Add publisher">
+    </form>
+</div>
+</body>
+</html>
