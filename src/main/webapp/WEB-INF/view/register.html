@@ -2,26 +2,47 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Register to Our website</title>
+    <title>Register to our website</title>
+    <link rel="stylesheet" href="../resources/form.css" th:href="@{/resources/form.css}">
+    <link rel="stylesheet" href="../resources/header.css" th:href="@{/resources/header.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-<header th:insert="~{fragments :: header}"></header>
-<div>
-    <form action="register_confirmation.html" th:action="@{register}" th:object="${newUser}" method="post">
-        <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
-        <label for="username">Username:</label>
-        <input type="text" id="username" th:field="*{username}"><br>
-        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
-        <label for="email">Email address:</label>
-        <input type="text" id="email" th:field="*{email}"><br>
-        <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
-        <p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p>
-        <label for="password">Password:</label>
-        <input type="password" id="password" th:field="*{password}"><br>
-        <label for="confirmPassword">Confirm password:</label>
-        <input type="password" id="confirmPassword" th:field="*{confirmPassword}"><br>
-        <input type="submit" value="register">
-    </form>
+<div th:replace="~{fragments :: header}"></div>
+<div th:replace="~{fragments :: menu-bar}"></div>
+<div class="content main-container">
+    <h2>Register to our website!</h2>
+    <div class="form-container">
+        <form action="register_confirmation.html" th:action="@{register}" th:object="${newUser}" method="post">
+            <p class="p-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>
+            <div class="row">
+                <label for="username">Username:</label>
+                <input type="text" id="username" th:field="*{username}">
+            </div>
+
+            <p class="p-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+            <div class="row">
+                <label for="email">Email:</label>
+                <input type="text" id="email" th:field="*{email}">
+            </div>
+
+            <p class="p-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+            <p class="p-error" th:if="${#fields.hasErrors('global')}" th:errors="*{global}"></p>
+            <div class="row">
+                <label for="password">Password:</label>
+                <input type="password" id="password" th:field="*{password}">
+            </div>
+
+            <div class="row">
+                <label for="confirmPassword">Confirm password:</label>
+                <input type="password" id="confirmPassword" th:field="*{confirmPassword}">
+            </div>
+            <div class="submit-button-row">
+                <input type="submit" value="Register">
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

@@ -22,7 +22,7 @@ public class UserRegistration {
 
     @NotNull(message = "validation.registration.password.required")
     @NotEmpty(message = "validation.registration.password.required")
-    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]$")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]{5,50}$", message="validation.registration.password.pattern")
     private String password;
     private String confirmPassword;
 

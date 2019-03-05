@@ -4,16 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Add new publisher</title>
+    <link rel="stylesheet" href="../resources/form.css" th:href="@{/resources/form.css}">
+    <link rel="stylesheet" href="../resources/header.css" th:href="@{/resources/header.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-<header th:insert="~{fragments :: header}"></header>
-<div>
-    <form action="add_game_get.html" th:action="@{add_publisher}" th:object="${newPublisher}" method="post">
-        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
-        <label for="name">Publisher name:</label><br>
-        <input type="text" id="name" th:field="*{name}"><br>
-        <input type="submit" value="Add publisher">
-    </form>
+<div th:replace="~{fragments :: header}"></div>
+<div th:replace="~{fragments :: menu-bar}"></div>
+<div class="content main-container">
+    <h2>Add new publisher</h2>
+    <div class="form-container">
+        <form action="add_game_get.html" th:action="@{addPublisher}" th:object="${newPublisher}" method="post">
+            <p class="p-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+            <div class="row">
+                <label for="name">Publisher name:</label>
+                <input type="text" id="name" th:field="*{name}">
+            </div>
+            <div class="submit-button-row">
+                <input type="submit" value="Add">
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

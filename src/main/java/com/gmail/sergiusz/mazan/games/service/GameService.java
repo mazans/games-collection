@@ -6,7 +6,6 @@ import com.gmail.sergiusz.mazan.games.exception.InvalidPublisherException;
 import com.gmail.sergiusz.mazan.games.model.Game;
 import com.gmail.sergiusz.mazan.games.model.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,8 +30,8 @@ public class GameService {
         return gameDao.getByPattern(pattern);
     }
 
-    public void addGame(Game newGame) {
-        gameDao.insert(newGame);
+    public int addGame(Game newGame) {
+        return gameDao.insertAndGetKey(newGame);
     }
 
     public List<Publisher> getAllPublishers() {

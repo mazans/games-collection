@@ -4,15 +4,18 @@ import com.gmail.sergiusz.mazan.games.model.Game;
 import com.gmail.sergiusz.mazan.games.model.Publisher;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Date;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 @Repository
 public class JdbcGameDao extends AbstractJdbcDao implements GameDao {
+
+    private static final String INSERT_QUERY = "insert into game(title, date_of_publication, publisher_id) " +
+            "values(?, ?, ?)";
 
     @Override
     public Game getById(int id) {
@@ -38,8 +41,20 @@ public class JdbcGameDao extends AbstractJdbcDao implements GameDao {
     @Override
     public void insert(Game entity) {
         Date yearOfPublication = Date.valueOf(entity.getDateOfPublication());
-        template.update("insert into game(title, date_of_publication, publisher_id) values(?, ?, ?)",
-                entity.getTitle(), yearOfPublication, entity.getPublisher().getId());
+        template.update(INSERT_QUERY, entity.getTitle(), yearOfPublication, entity.getPublisher().getId());
+    }
+
+    @Override
+    public int insertAndGetKey(Game entity) {
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        template.update((Connection connection) -> {
+            PreparedStatement preparedStatement = connection.prepareStatement(INSERT_QUERY, new String[] {"game_id"});
+            preparedStatement.setString(1, entity.getTitle());
+            preparedStatement.setDate(2, Date.valueOf(entity.getDateOfPublication()));
+            preparedStatement.setInt(3, entity.getPublisher().getId());
+            return preparedStatement;
+        }, keyHolder);
+        return keyHolder.getKey().intValue();
     }
 
     private static class GameMapper implements RowMapper<Game> {

@@ -3,24 +3,44 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<div th:fragment="header">
-    <h1>Games Collection Site</h1>
-    <div sec:authorize="isAuthenticated()">
-        <span th:text="|Hello, ${session.user.username}! |"></span>
-        <a href="user.html" th:href="@{user}">Your account</a>
-    </div>
-    <div sec:authorize="!isAuthenticated()">
-        <p>
-             You are not logged in! <a href="login.html" th:href="@{login}">Log in!</a>
-        </p>
-    </div>
+<div class="header-container" th:fragment="header">
+    <header class="content">
+        <div class="header-logo">
+            <a id="logo-link" href="index.html" th:href="@{/}">
+                <h1>
+                    <i class="fas fa-gamepad"></i>Games Collection
+                </h1>
+            </a>
+        </div>
+
+        <div class="header-user-info" sec:authorize="!isAuthenticated()">
+            You are not logged in! <a class="account-link" href="login.html" th:href="@{login}">Log in!</a>
+        </div>
+
+        <div class="header-user-info" sec:authorize="isAuthenticated()">
+            Hello, <span id="username-info" th:text="${session.user.username}"></span>!
+            <a class="account-link" href="user.html" th:href="@{user}">Your account</a>
+        </div>
+    </header>
 </div>
-<div th:fragment="search-bar">
-    <form action="search.html" th:action="@{search}" method="get">
-        <label for="search">Search games:</label>
-        <input type="text" id="search" name="pattern"/>
-        <input type="submit" value="Search"/>
-    </form>
+
+
+<div class="menu-bar-container" th:fragment="menu-bar">
+    <div class="menu-bar content">
+        <form id="search-form" action="search.html" th:action="@{search}" method="get">
+            <label for="search">Search games:</label>
+            <input type="text" id="search" name="pattern" placeholder="Search..."/>
+            <button id="search-button" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </form>
+
+        <nav>
+            <a class="nav-link" href="add_game_get.html" th:href="@{/addGame}">
+                Add Game <i class="fas fa-plus nav-icon"></i>
+            </a>
+        </nav>
+    </div>
 </div>
 
 </html>

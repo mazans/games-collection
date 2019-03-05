@@ -3,10 +3,14 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../resources/header.css" th:href="@{/resources/header.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
     <title>Main page</title>
 </head>
 <body>
-<header th:insert="~{fragments :: header}"></header>
-<div th:insert="~{fragments :: search-bar}"></div>
+<div th:replace="~{fragments :: header}"></div>
+<div th:replace="~{fragments :: menu-bar}"></div>
 </body>
 </html>

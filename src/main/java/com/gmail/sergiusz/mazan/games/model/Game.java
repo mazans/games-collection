@@ -1,22 +1,13 @@
 package com.gmail.sergiusz.mazan.games.model;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Objects;
 
 public class Game {
 
     private int id;
-
-    @NotNull(message = "validation.game.title")
-    @NotEmpty(message = "validation.game.title")
     private String title;
-
-    @NotNull(message = "validation.game.date")
     private LocalDate dateOfPublication;
-
-    @NotNull(message = "validation.game.publisher")
     private Publisher publisher;
 
     public Game() {}

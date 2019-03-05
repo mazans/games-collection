@@ -4,30 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <title>Add new game</title>
+    <link rel="stylesheet" href="../resources/form.css" th:href="@{/resources/form.css}">
+    <link rel="stylesheet" href="../resources/header.css" th:href="@{/resources/header.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 </head>
 <body>
-<header th:insert="~{fragments :: header}"></header>
-<div th:if="${addPublisherResult} != null">
-    <p th:text="${addPublisherResult}"></p>
-</div>
-<div>
-    <form action="search.html" th:action="@{add_game}" th:object="${newGame}" method="post">
-        <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
-        <label for="title">Game title:</label><br>
-        <input type="text" id="title" th:field="*{title}"><br>
-        <p th:if="${#fields.hasErrors('dateOfPublication')}" th:errors="*{dateOfPublication}"></p>
-        <label for="dateOfPublication">Date of publication:</label><br>
-        <input type="date" id="dateOfPublication" th:field="*{dateOfPublication}"><br>
-        <p th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}"></p>
-        <label for="publisher">Publisher:</label><br>
-        <select id="publisher" th:field="*{publisher}">
-            <option th:each="publisher : ${publishers}"
-                    th:value="${publisher.id}"
-                    th:text="${publisher.name}">CDPR</option>
-        </select><br>
-        <a href="add_publisher_get.html" th:href="add_publisher">Isn't any publisher correct? Add one!</a><br>
-        <input type="submit" value="Add game">
-    </form>
+<div th:replace="~{fragments :: header}"></div>
+<div th:replace="~{fragments :: menu-bar}"></div>
+<div class="content main-container">
+    <h2>Add new Game</h2>
+    <div class="form-container">
+        <form action="search.html" th:action="@{addGame}" th:object="${newGame}" method="post"
+              enctype="multipart/form-data">
+
+            <p class="p-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></p>
+            <div class="row">
+                <label for="title">Game title:</label>
+                <input type="text" id="title" th:field="*{title}">
+            </div>
+
+            <p class="p-error" th:if="${#fields.hasErrors('dateOfPublication')}" th:errors="*{dateOfPublication}"></p>
+            <div class="row">
+                <label for="dateOfPublication">Date of publication:</label>
+                <input type="date" id="dateOfPublication" th:field="*{dateOfPublication}">
+            </div>
+
+            <p class="p-error" th:if="${#fields.hasErrors('publisher')}" th:errors="*{publisher}"></p>
+            <div class="row">
+                <label for="publisher">Publisher:</label>
+                <select id="publisher" th:field="*{publisher}">
+                    <option th:each="publisher : ${publishers}"
+                            th:value="${publisher.id}"
+                            th:text="${publisher.name}">CDPR
+                    </option>
+                </select>
+            </div>
+            <div class="row publisher-link">
+                <a href="add_publisher_get.html" th:href="addPublisher">Isn't any publisher correct? Add one!</a>
+            </div>
+
+            <p class="p-error" th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"></p>
+            <div class="row">
+                <label for="cover">Cover:</label>
+                <input type="file" accept="image/png" id="cover" th:field="*{cover}">
+            </div>
+
+            <div class="submit-button-row">
+                <input type="submit" value="Add">
+            </div>
+        </form>
+    </div>
 </div>
 </body>
 </html>

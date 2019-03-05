@@ -47,7 +47,7 @@ public class UserService {
         catch(InvalidUserDataException e) {
             Set<RegistrationResult> result = EnumSet.noneOf(RegistrationResult.class);
             if(gameUserDao.getByUsername(newUser.getUsername()) != null)
-                result.add(RegistrationResult.DUPLIACTE_USERNAME);
+                result.add(RegistrationResult.DUPLICATE_USERNAME);
             if(gameUserDao.getByEmail(newUser.getEmail()) != null)
                 result.add(RegistrationResult.DUPLICATE_EMAIL);
             return result;

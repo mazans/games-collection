@@ -9,4 +9,5 @@ public interface GameDao {
     List<Game> getByPattern(String pattern);
     List<Game> getGamesOfUser(int userId);
     void insert(Game entity);
+    int insertAndGetKey(Game entity);
 }

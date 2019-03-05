@@ -1,0 +1,85 @@
+h2 {
+    margin: 0;
+    text-transform: uppercase;
+    font-size: 1.25em;
+    font-family: Arial;
+    font-weight: normal
+}
+
+.form-container {
+    width: 50%;
+    margin: 10px auto;
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+form .row {
+    margin: 10px auto;
+    width: 50%;
+}
+
+.form-container label {
+    width: 100%;
+    text-align: start;
+    display: block;
+    margin: auto auto 2px auto;
+}
+
+.form-container input {
+    margin: auto;
+    width: 100%;
+    display: block;
+    box-sizing: border-box;
+}
+
+.submit-button-row {
+    width: 50%;
+    text-align: right;
+    margin: 10px auto;
+}
+
+input[type="submit"] {
+    margin: 5px 0 0 0;
+    padding-right: 0;
+    display: inline;
+    width: 80px;
+    height: 30px;
+    background-color: lightgray;
+    border-width: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#register-link-container {
+    width: 50%;
+    margin: auto;
+    text-align: left;
+}
+
+#register-link {
+    color: #BC4123;
+}
+
+.p-error {
+    color: red;
+    margin: 10px auto;
+    width: 50%;
+    text-align: start;
+}
+
+.publisher-link {
+    font-size: 0.75em;
+    text-align: left;
+}
+
+.publisher-link a:link, .publisher-link a:active, .publisher-link a:visited {
+    color: #BC4123;
+}
+
+.publisher-link a:hover {
+    color: black;
+}
+
+#publisher {
+    width: 100%;
+}
