@@ -12,6 +12,7 @@ create table app_user
 	user_id int(6) auto_increment,
     username varchar(50) not null unique,
     email varchar(50) not null unique,
+    user_password varchar(255) not null,
     
     constraint user_id_pk primary key(user_id)
 );
@@ -28,7 +29,8 @@ create table game
 (
 	game_id int(10) auto_increment,
     title varchar(100) not null,
-    year_of_publication date not null,
+    date_of_publication date not null,
+    datetime_of_add datetime not null,
     publisher_id int(4) not null,
     
     constraint game_id_pk primary key(game_id),
