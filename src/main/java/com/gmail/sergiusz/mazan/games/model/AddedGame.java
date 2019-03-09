@@ -9,17 +9,17 @@ import java.time.LocalDate;
 
 public class AddedGame {
 
-    @NotNull(message = "validation.game.title")
-    @NotEmpty(message = "validation.game.title")
+    @NotNull(message = "Game title is required")
+    @NotEmpty(message = "Game title is required")
     private String title;
 
-    @NotNull(message = "validation.game.date")
+    @NotNull(message = "Date o publication is required")
     private LocalDate dateOfPublication;
 
-    @NotNull(message = "validation.game.publisher")
+    @NotNull(message = "Publisher is required")
     private Publisher publisher;
 
-    @ContentType(contentType = "image/png", message = "validation.game.cover")
+    @ContentType(contentType = "image/png", message = "Game cover must be .png")
     private MultipartFile cover;
 
     public AddedGame() {}

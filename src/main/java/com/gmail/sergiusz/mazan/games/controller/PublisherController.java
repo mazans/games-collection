@@ -43,7 +43,7 @@ public class PublisherController {
                 return "add_publisher_confirmation";
             else {
                 bindingResult.addError(new FieldError("newPublisher", "name",
-                        "validation.publisher.exists"));
+                        "Publisher with given name already exists"));
                 return "add_publisher_get";
             }
         }

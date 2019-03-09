@@ -7,8 +7,8 @@ public class Publisher {
 
     private int id;
 
-    @NotNull(message = "validation.publisher.title.empty")
-    @NotEmpty(message = "validation.publisher.title.empty")
+    @NotNull(message = "Name of publisher is required")
+    @NotEmpty(message = "Name of publisher is required")
     private String name;
 
     public int getId() {

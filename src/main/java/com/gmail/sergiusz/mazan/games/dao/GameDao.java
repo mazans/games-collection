@@ -10,4 +10,5 @@ public interface GameDao {
     List<Game> getGamesOfUser(int userId);
     void insert(Game entity);
     int insertAndGetKey(Game entity);
+    List<Game> getLatestGames(int amount);
 }

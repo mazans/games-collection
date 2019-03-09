@@ -7,9 +7,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.validation.beanvalidation.MethodValidationPostProcessor;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -27,13 +28,20 @@ import java.util.Set;
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.gmail.sergiusz.mazan")
+@PropertySource("classpath:/upload.properties")
 public class WebConfig implements WebMvcConfigurer {
 
     private ApplicationContext applicationContext;
+    private Environment environment;
 
     @Autowired
     void setApplicationContext(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
+    }
+
+    @Autowired
+    void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 
     //Configuring connection with Thymeleaf
@@ -90,6 +98,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
+        registry.addResourceHandler("/covers/**")
+                .addResourceLocations("file:" + environment.getProperty("upload.location"));
     }
 
     //Multipart resolver

@@ -52,9 +52,9 @@ public class RegisterController {
     private void addRegistrationErrors(Set<RegistrationResult> registrationResults, BindingResult bindingResult) {
         if(registrationResults.contains(RegistrationResult.DUPLICATE_EMAIL))
             bindingResult.addError(new FieldError("newUser", "email",
-                    "validation.registration.email.used"));
+                    "Email address is already used"));
         if(registrationResults.contains(RegistrationResult.DUPLICATE_USERNAME))
             bindingResult.addError(new FieldError("newUser", "username",
-                    "validation.registration.username.used"));
+                    "Username is already used"));
     }
 }

@@ -3,37 +3,51 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Account</title>
+    <link rel="stylesheet" href="../resources/header.css" th:href="@{/resources/header.css}">
+    <link rel="stylesheet" href="../resources/games.css" th:href="@{/resources/games.css}">
+    <link rel="stylesheet" href="../resources/user.css" th:href="@{/resources/user.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <title>Your account</title>
 </head>
 <body>
-<header th:insert="~{fragments :: header}"></header>
-<div th:object="${session.user}">
-    <p th:text="|Username: *{username}"></p>
-    <p th:text="|Email: *{email}"></p>
-    <p>Your games:</p>
+<div th:replace="~{fragments :: header}"></div>
+<div th:replace="~{fragments :: menu-bar}"></div>
+<div th:object="${session.user}" class="content main-container">
+    <p style="color: green"
+       th:if="${addResult == T(com.gmail.sergiusz.mazan.games.service.AddGameToUserResult).OK}">
+        Game has been added
+    </p>
+    <p style="color: red"
+       th:if="${addResult == T(com.gmail.sergiusz.mazan.games.service.AddGameToUserResult).USER_HAS_GAME}">
+        You already have this game
+    </p>
+    <h2>User information</h2>
+    <div class="user-info">
+        <p th:text="|Username: *{username}|"></p>
+        <p th:text="|Email: *{email}|"></p>
+        <form action="index.html" th:action="@{/logout}" method="post">
+            <input type="submit" value="Logout">
+            <input type="hidden"
+                   th:name="${_csrf.parameterName}"
+                   th:value="${_csrf.token}">
+        </form>
+    </div>
+    <h2>Your games</h2>
     <p th:if="*{games.isEmpty()}">You don't have games in your collection</p>
-    <table th:unless="*{games.isEmpty()}">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Year of publication</th>
-            <th>Publisher</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="game : *{games}">
-            <td th:text="${game.title}">Assassin's Creed</td>
-            <td th:text="${{game.dateOfPublication}}">2008</td>
-            <td th:text="${{game.publisher}}">Ubisoft</td>
-        </tr>
-        </tbody>
-    </table>
-    <form action="index.html" th:action="@{/logout}" method="post">
-        <input type="submit" value="Logout">
-        <input type="hidden"
-               th:name="${_csrf.parameterName}"
-               th:value="${_csrf.token}">
-    </form>
+    <div class="games-list" th:unless="*{games.isEmpty()}">
+        <ul>
+            <li th:each="game : *{games}">
+                <div class="game-container">
+                    <img class="game-image" th:src="@{/covers/cover-__${game.id}__}">
+                    <p th:text="|Title: ${game.title}|"></p>
+                    <p th:text="|Date of publication: ${game.dateOfPublication}|"></p>
+                    <p th:text="|Publisher: ${game.publisher.name}|"></p>
+                </div>
+            </li>
+        </ul>
+    </div>
 </div>
 </body>
 </html>

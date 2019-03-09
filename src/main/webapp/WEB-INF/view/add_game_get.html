@@ -36,7 +36,8 @@
                 <select id="publisher" th:field="*{publisher}">
                     <option th:each="publisher : ${publishers}"
                             th:value="${publisher.id}"
-                            th:text="${publisher.name}">CDPR
+                            th:text="${publisher.name}">
+                        CDPR
                     </option>
                 </select>
             </div>

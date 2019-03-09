@@ -8,6 +8,7 @@ import com.gmail.sergiusz.mazan.games.model.Publisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,6 +32,7 @@ public class GameService {
     }
 
     public int addGame(Game newGame) {
+        newGame.setDateTimeOfAdd(LocalDateTime.now());
         return gameDao.insertAndGetKey(newGame);
     }
 
@@ -45,5 +47,9 @@ public class GameService {
         } catch(InvalidPublisherException e) {
             return AddPublisherResult.PUBLISHER_ALREADY_EXISTS;
         }
+    }
+
+    public List<Game> getLatestGames(int amount) {
+        return gameDao.getLatestGames(amount);
     }
 }

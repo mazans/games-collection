@@ -18,7 +18,8 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String index() {
+    public String index(Model model) {
+        model.addAttribute("latestGames", gameService.getLatestGames(10));
         return "index";
     }
 

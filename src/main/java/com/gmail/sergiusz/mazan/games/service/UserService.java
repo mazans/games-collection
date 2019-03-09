@@ -64,8 +64,8 @@ public class UserService {
     public AddGameToUserResult addGameToUser(GameUser user, int gameId) {
         try {
             Game game = gameDao.getById(gameId);
-            user.getGames().add(game);
             gameUserDao.addGameToUser(user, game);
+            user.getGames().add(game);
             return AddGameToUserResult.OK;
         } catch (InvalidUserDataException e) {
             return AddGameToUserResult.USER_HAS_GAME;

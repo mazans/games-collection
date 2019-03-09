@@ -41,6 +41,7 @@ public class GameController {
                                     Model model) {
         if(bindingResult.hasErrors()) {
             model.addAttribute("newGame", newGame);
+            model.addAttribute("publishers", gameService.getAllPublishers());
             return "add_game_get";
         }
         else {

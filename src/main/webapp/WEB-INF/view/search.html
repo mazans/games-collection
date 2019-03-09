@@ -3,35 +3,32 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="../resources/header.css" th:href="@{/resources/header.css}">
+    <link rel="stylesheet" href="../resources/games.css" th:href="@{/resources/games.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+          integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <title >Search Result</title>
 </head>
 <body>
     <header th:insert="~{fragments :: header}"></header>
-    <div th:insert="~{fragments :: search-bar}"></div>
-    <div>
-        <p>Search result:</p>
-        <p th:if="${games.isEmpty()}">There are no games matching such pattern.</p>
-        <table th:unless="${games.isEmpty()}">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Year of publication</th>
-                <th>Publisher</th>
-                <th>Add Game</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="game : ${games}">
-                <td th:text="${game.title}">Assassin's Creed</td>
-                <td th:text="${{game.dateOfPublication}}">2008</td>
-                <td th:text="${{game.publisher}}">Ubisoft</td>
-                <td>
-                    <a href="search.html" th:href="@{'user/add/' + ${game.id}}">Add</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-        <a href="add_game">Haven't found your game? Add one!</a>
+    <div th:insert="~{fragments :: menu-bar}"></div>
+    <div class="content main-container">
+        <h2>Search result:</h2>
+        <p th:if="${games.isEmpty()}">No game matches given pattern</p>
+        <div class="games-list" th:unless="${games.isEmpty()}">
+            <ul>
+                <li th:each="game : ${games}">
+                    <div class="game-container">
+                        <img class="game-image" th:src="@{/covers/cover-__${game.id}__}">
+                        <p th:text="|Title: ${game.title}|"></p>
+                        <p th:text="|Date of publication: ${game.dateOfPublication}|"></p>
+                        <p th:text="|Publisher: ${game.publisher.name}|"></p>
+                        <p><a href="search.html" th:href="@{'user/add/' + ${game.id}}">Add</a></p>
+                    </div>
+                </li>
+            </ul>
+            <a href="add_game">Haven't found your game? Add one!</a>
+        </div>
     </div>
 </body>
 </html>

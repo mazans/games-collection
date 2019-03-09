@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../resources/header.css" th:href="@{/resources/header.css}">
+    <link rel="stylesheet" href="../resources/games.css" th:href="@{/resources/games.css}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
           integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
@@ -12,5 +13,21 @@
 <body>
 <div th:replace="~{fragments :: header}"></div>
 <div th:replace="~{fragments :: menu-bar}"></div>
+<div class="content main-container">
+    <h2>Recently added games</h2>
+    <div class="games-list">
+        <ul>
+            <li th:each="game : ${latestGames}">
+                <div class="game-container">
+                    <img class="game-image" th:src="@{/covers/cover-__${game.id}__}">
+                    <p th:text="|Title: ${game.title}|"></p>
+                    <p th:text="|Date of publication: ${game.dateOfPublication}|"></p>
+                    <p th:text="|Publisher: ${game.publisher.name}|"></p>
+                    <p><a href="search.html" th:href="@{'user/add/' + ${game.id}}">Add</a></p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>

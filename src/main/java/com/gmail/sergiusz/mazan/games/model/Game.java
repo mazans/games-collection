@@ -1,6 +1,7 @@
 package com.gmail.sergiusz.mazan.games.model;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Game {
@@ -8,6 +9,7 @@ public class Game {
     private int id;
     private String title;
     private LocalDate dateOfPublication;
+    private LocalDateTime dateTimeOfAdd;
     private Publisher publisher;
 
     public Game() {}
@@ -16,6 +18,14 @@ public class Game {
         this.title = title;
         this.dateOfPublication = dateOfPublication;
         this.publisher = publisher;
+    }
+
+    public LocalDateTime getDateTimeOfAdd() {
+        return dateTimeOfAdd;
+    }
+
+    public void setDateTimeOfAdd(LocalDateTime dateTimeOfAdd) {
+        this.dateTimeOfAdd = dateTimeOfAdd;
     }
 
     public int getId() {

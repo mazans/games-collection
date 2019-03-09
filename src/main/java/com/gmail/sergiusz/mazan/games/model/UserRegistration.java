@@ -6,23 +6,25 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@MatchingPassword(message = "validation.registration.password.match")
+@MatchingPassword(message = "Passwords must match")
 public class UserRegistration {
 
-    @NotNull(message = "validation.registration.username.required")
-    @NotEmpty(message = "validation.registration.username.required")
-    @Pattern(regexp = "^[a-zA-Z0-9_]{5,50}$",message = "validation.registration.username.pattern")
+    @NotNull(message = "Username is required")
+    @NotEmpty(message = "Username is required")
+    @Pattern(regexp = "^[a-zA-Z0-9_]{5,50}$",
+            message = "Username must contain 5 to 50 characters. Allowed characters: letters, numbers, _")
     private String username;
 
-    @NotNull(message = "validation.registration.email.required")
+    @NotNull(message = "Email is required")
     @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$",
-            message = "validation.registration.email.pattern")
+            message = "Email address is invalid")
     private String email;
 
 
-    @NotNull(message = "validation.registration.password.required")
-    @NotEmpty(message = "validation.registration.password.required")
-    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]{5,50}$", message="validation.registration.password.pattern")
+    @NotNull(message = "Password is required")
+    @NotEmpty(message = "Password is required")
+    @Pattern(regexp = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]{5,50}$",
+            message="Password must contain 5 to 50 characters. Allowed charaters: letters, numbers, _!#$%&’*+/=?`{|}~^.-")
     private String password;
     private String confirmPassword;
 
